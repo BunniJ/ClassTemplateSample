@@ -6,11 +6,31 @@
 //
 
 #include <iostream>
+#include <string>
 #include "MyArray.hpp"
+
+class Person {
+public:
+    Person(){};
+    Person(string name, int age){
+        this->mName = name;
+        this->mAge = age;
+    };
+    
+    string mName;
+    int mAge;
+};
 
 void printArray(MyArray<int> &arr) {
     for(int i = 0; i < arr.getSize(); i++) {
         cout << arr[i] << endl;
+    }
+}
+
+void printPersonArray(MyArray<Person> &arr) {
+    for(int i = 0; i < arr.getSize(); i++) {
+        cout << "Name: " << arr[i].mName << " "
+        << "Age: " << arr[i].mAge << endl;
     }
 }
 
@@ -41,10 +61,33 @@ void test01() {
     cout << "Size is: " << arr2.getSize() << endl;
 }
 
+void test02() {
+    // Test custom datatype
+    MyArray<Person> arr(10);
+    Person p1("Bob", 99);
+    Person p2("Jim", 3);
+    Person p3("Ada", 10);
+    
+    // Test tail insertion
+    arr.pushBack(p1);
+    arr.pushBack(p2);
+    arr.pushBack(p3);
+    
+    // print Person array
+    printPersonArray(arr);
+    
+    // Get capacity and size
+    cout << "Custom datatype arrray capacity is: " << arr.getCapacity() << " "
+    << "and size is: " << arr.getSize() << endl;
+}
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
+    
+    // test build-in datatypre
     test01();
+    
+    // test custom datatype
+    test02();
     
     return 0;
 }
